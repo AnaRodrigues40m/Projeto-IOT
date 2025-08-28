@@ -18,7 +18,7 @@ class SensorCreate extends Component
 
     protected $rules = [
         'ambiente_id'=> 'required',
-        'codigo' => 'required|unique:sensor, codigo',
+        'codigo' => 'required|unique:sensors,codigo',
         'tipo' => 'required',
         'descricao' => 'required'
     ];

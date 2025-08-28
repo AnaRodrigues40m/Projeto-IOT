@@ -2,7 +2,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-lg border-light rounded">
-                <div class="card-header text-center fw-bold text-danger mb-1">
+                <div class="card-header text-center fw-bold text-dark mb-1">
                     <h4>Cadastro de Sensores</h4>
                 </div>
                 <div class="card-body">
@@ -44,9 +44,9 @@
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" role="switch" id="status"
                                 wire:model.defer="status">
-                            <label class="form-check-label" for="status">Status do ambiente</label>
+                            <label class="form-check-label" for="status"  wire:model.defer="status">Status do ambiente</label>
                         </div>
-                        <a href="{{ route('sensor.list') }}"><input class="btn btn-danger mt-2" type="submit"
+                        <a href="{{ route('sensor.list') }}"><input class="btn btn-primary mt-2" type="submit"
                                 value="Submit"></a>
                     </form>
                 </div>

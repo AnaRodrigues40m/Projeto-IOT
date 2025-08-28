@@ -2,9 +2,9 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div class="col-8">
-            <h2 class="fw-bold text-danger mb-1">Sensores</h2>
+            <h2 class="fw-bold text-dark mb-1">Sensores</h2>
         </div>
-        <a class="btn btn-danger btn-lg" href="{{ route('sensor.create') }}">
+        <a class="btn btn-primary btn-lg" href="{{ route('sensor.create') }}">
             Novo Sensor
         </a>
     </div>
