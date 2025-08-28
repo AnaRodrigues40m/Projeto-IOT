@@ -9,15 +9,15 @@ class AmbienteCreate extends Component
 {
     public $nome;
     public $descricao;
-    public $status;
+    public $status = false;
 
-     public function store()
+    public function store()
     {
-
+        // dd($this->status);
         Ambiente::Create([
-            'nome' => $this -> nome,
-            'descricao' => $this -> descricao,
-            'status' => $this -> status,
+            'nome' => $this->nome,
+            'descricao' => $this->descricao,
+            'status' => $this->status,
         ]);
 
         session()->flash('message', 'Ambiente Criado com Sucesso. . .');
