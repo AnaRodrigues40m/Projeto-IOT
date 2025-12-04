@@ -8,6 +8,7 @@ use Livewire\Component;
 
 class SensorEdit extends Component
 {
+    public $sensorId;
     public $ambiente_id;
     public $codigo;
     public $tipo;
@@ -17,7 +18,7 @@ class SensorEdit extends Component
     protected function rules()
     {
         return [
-            'codigo'=> 'string|max:255',
+            'codigo'=> 'required|unique:sensors,codigo,' . $this->sensorId,
             'tipo'=> 'string|max:255',
             'descricao'=> 'string|max:255',
         ];
@@ -28,28 +29,34 @@ class SensorEdit extends Component
 
     public function mount($id)
     {
-        $sensor = Sensor::find($id);
+          $sensor = Sensor::find($id);
+        if ($sensor == null) {
+            session()->flash('error', 'ID nao encontrado.');
+        } else {
 
-        $this->ambiente_id = $sensor->id;
-        $this->codigo = $sensor->codigo;
-        $this->tipo = $sensor->tipo;
-        $this->descricao = $sensor->descricao;
-        $this->status = $sensor->status;
-
+            $this->sensorId = $sensor->id;
+            $this->tipo = $sensor->tipo;
+            $this->codigo = $sensor->codigo;
+            $this->descricao = $sensor->descricao;
+            $this->status = $sensor->status;
+            $this->ambiente_id = $sensor->ambiente_id;
+        }
     }
 
     public function salvar(){
-        $this->validate();
+          $this->validate();
 
         $sensor = Sensor::find($this->sensorId);
+
 
         $sensor->update([
             'ambiente_id' => $this->ambiente_id,
             'codigo' => $this->codigo,
             'tipo' => $this->tipo,
             'descricao' => $this->descricao,
-            'status' => $this->status
+            'status' => $this->status,
         ]);
+        return redirect()->route('sensor.list');
     }
 
     public function render()

@@ -4,6 +4,8 @@
 use App\Livewire\Ambiente\AmbienteCreate;
 use App\Livewire\Ambiente\AmbienteEdit;
 use App\Livewire\AmbienteList;
+use App\Livewire\Auth\Login;
+use App\Livewire\ControleLed;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/ambiente/edit/{id}', AmbienteEdit::class)->name('ambiente.edit');
@@ -11,14 +13,17 @@ Route::get('/ambiente/create', AmbienteCreate::class)->name('ambiente.create');
 Route::get('/ambiente/list', AmbienteList::class)->name('ambientes.list');
 
 use App\Livewire\Dashboard;
+use App\Livewire\RegistroList;
 use App\Livewire\SensorCreate;
 use App\Livewire\SensorEdit;
 use App\Livewire\SensorList;
-use Illuminate\Support\Facades\Route;
 
-Route::get('/', Dashboard::class);
+Route::get('/', Dashboard::class)->name('dashboard');
 
 
 Route::get('/sensor/list', SensorList::class)->name('sensor.list');
 Route::get('/sensor/create', SensorCreate::class)->name('sensor.create');
 Route::get('/sensor/edit/{id}', SensorEdit::class)->name('sensor.edit');
+Route::get('/registro/list', RegistroList::class)->name('registro.list');
+Route::get('controle/led', ControleLed::class)->name('controle.led');
+Route::get('/login', Login::class)->name('login');

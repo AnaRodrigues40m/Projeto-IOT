@@ -1,56 +1,85 @@
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow-lg border-light rounded">
-                <div class="card-header text-center fw-bold text-danger mb-1">
-                    <h4>Edição de Sensores</h4>
-                </div>
-                <div class="card-body">
-                    <form wire:submit.prevent="salvar">
-                        <label for="ambiente_id" class="form-label">Ambiente</label>
-                        <select class="form-select" aria-label="Default select example" wire:model.defer='ambiente_id' id="ambiente_id">
-                            <option selected>Ambiente</option>
-                            @foreach ($ambientes as $a)
-                                <option value="{{ $a->id }}">{{ $a->nome }}</option>
-                            @endforeach
-                        </select>
-                        @error('ambiente_id')
+<div class="mt-5">
+
+    @if (session()->has('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @else
+        @if (session()->has('message'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('message') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        <div class="card mx-auto my-5 shadow-lg p-3 mb-5 bg-white rounded w-75">
+            <h3 class="card-header d-flex justify-content-center">Editar Sensor</h3>
+            <div class="card-body">
+                <form wire:submit.prevent="salvar">
+               <div class="mb-3">
+                    <label for="ambiente" class="form-label">Id do Ambiente</label>
+
+                    <select class="form-select" id="ambiente_id" wire:model.defer="ambiente">
+                        <option hidden>Selecione um ambiente</option>
+                        @foreach ($ambientes as $ambiente)
+                            <option value={{ $ambiente->id }}> {{ $ambiente->nome }} </option>
+                        @endforeach
+                    </select>
+                    @error('ambiente')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
-                        <div class="mb-3">
-                            <label for="codigo" class="form-label">Código</label>
-                            <input type="text" class="form-control" id="codigo" wire:model.defer="codigo"
-                                placeholder="digite aqui...">
-                        </div>
+                </div>
+
+                    
+                    <div class="mb-3">
+                        <label for="codigo" class="form-label">codigo</label>
+                        <input type="codigo" class="form-control" id="codigo"
+                            placeholder="Insira o codigo do sensor" wire:model.defer="codigo">
                         @error('codigo')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
-                        <div class="mb-3">
-                            <label for="descricao" class="form-label">Descrição</label>
-                            <input type="text" class="form-control" id="descricao" wire:model.defer="descricao"
-                                placeholder="digite aqui...">
-                        </div>
-                        @error('descricao')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                        <div class="mb-3">
-                            <label for="tipo" class="form-label">Tipo</label>
-                            <input type="text" class="form-control" id="tipo" wire:model.defer="tipo"
-                                placeholder="digite aqui...">
-                        </div>
+                    </div>
+
+                       <div class="mb-3">
+                        <label for="tipo" class="form-label">tipo</label>
+                        <input type="tipo" class="form-control" id="tipo" wire:model.defer="tipo">
                         @error('tipo')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="status"
-                                wire:model.defer="status">
-                            <label class="form-check-label" for="status">Status do ambiente</label>
-                        </div>
-                        <a href="{{ route('sensor.list') }}"><input class="btn btn-danger mt-2" type="submit"
-                                value="Salvar"></a>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="descricao" class="form-label">descricao</label>
+                        <input type="descricao" class="form-control" id="descricao" wire:model.defer="descricao">
+                        @error('descricao')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="status" class="form-label">status</label>
+
+                        <select class="form-select @error('status') is-invalid @enderror" wire:model.defer="status"
+                            id="status">
+                            <option hidden>Selecione seu cargo</option>
+                            <option value="1">Ativo</option>
+                            <option value="0">Inativo</option>
+                        </select>
+
+                        @error('status')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+
+
+                    <div class="mb-3 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-dark w-75 p-3">Atualizar</button>
+
+                    </div>
+                </form>
+    @endif
+</div>
+</div>
 </div>
